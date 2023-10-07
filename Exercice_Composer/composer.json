@@ -1,0 +1,19 @@
+{
+    "name": "poo/exemple_composer",
+    "description": "un exemple de résolution d'un exercice composer",
+    "type": "project",
+    "require": {
+        "fakerphp/faker": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "Poo\\ExempleComposer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "KLEYER",
+            "email": "38478356+RRINKIN@users.noreply.github.com"
+        }
+    ]
+}
