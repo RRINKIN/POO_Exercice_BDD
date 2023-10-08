@@ -51,7 +51,22 @@ class personneManager{
         $stmt->execute();
     }
 
-    public function getAll (personne $personne){
+    public function readAll(){
+        $stmt = $this->getConnexion()->prepare("SELECT * FROM personnes");
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'personnes');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function read($idPersonne){
+        $stmt = $this->getConnexion()->prepare("SELECT * FROM personnes WHERE id = $idPersonne");
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'personnes');
+        $stmt->execute();
+        $personne = $stmt->fetch(\PDO::FETCH_CLASS);
+        return $personne;
+    }
+
+    public function update(personne $personne){
         $stmt = $this->getConnexion()->prepare("INSERT INTO personnes (nom, prenom, adresse, codePostal, pays, societe) VALUES (:nom,:prenom,:adresse,:codePostal,:pays,:societe)");
         $stmt->bindValue(':nom', $personne->getName(), \PDO::PARAM_STR);
         $stmt->bindValue(':prenom', $personne->getPrenom(), \PDO::PARAM_STR);
@@ -60,6 +75,11 @@ class personneManager{
         $stmt->bindValue(':pays', $personne->getPays(), \PDO::PARAM_STR);
         $stmt->bindValue(':societe', $personne->getSociete(), \PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public function delete($idPersonne){
+        $stmt= $this->getConnexion()->prepare("DELETE FROM personnes WHERE id=?");
+        $stmt->execute([$idPersonne]);
     }
 }
 ?>

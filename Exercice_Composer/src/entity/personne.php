@@ -4,6 +4,7 @@ namespace Poo\ExempleComposer\entity;
 // classe
 class personne{
     // Attributes
+    private $id;
     private $nom;
     private $prenom;
     private $adresse;
@@ -16,6 +17,11 @@ class personne{
     }
 
     // Setters & Getters
+    // ID
+    public function getId(){
+        return $this->id;
+    }
+
     // nom
     public function getName(){
         return $this->nom;

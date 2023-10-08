@@ -7,10 +7,11 @@ use Poo\ExempleComposer\manager\personneManager;
 // connection to DB
 $connexion = new PDO('mysql:host=localhost:8889;dbname=poo_php', 'root', 'root');
 
-// affichage
+// utilisation de Faker
 $number = 5;
 $newPersonne = new personneManager($connexion);
 $testPersonne = $newPersonne->create($number);
+// Affichage de Faker
 echo "<table>";
 echo "<thead>";
 echo "<tr>";
@@ -39,4 +40,6 @@ foreach ($testPersonne as $personne) {
 }
 echo "</tbody>";
 echo "</table>";
+$newPersonne->readAll();
+$newPersonne->read(1);
 ?>
