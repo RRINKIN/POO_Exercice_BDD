@@ -8,11 +8,21 @@ use Faker\Factory;
 
 // generate fake people
 class personneManager{
-    // constructor
-    public function __construct(){
+    // connction to DB
+    private $connexion = null; //object PDO
+    public function __construct($connex) {
+        $this->connexion = $connex;
+    }
+    
+    public function getConnexion(){
+        return $this->connexion;
     }
 
-    // other functions
+    public function setConnexion($connexion){
+        $this->connexion = $connexion;
+    }
+
+    // Function faker
     public function create($number){
         $personnes = [];
         $faker = Factory::create();
@@ -27,6 +37,29 @@ class personneManager{
             array_push($personnes, $personne);
         }    
         return $personnes;
+    }
+
+    // Functions CRUD
+    public function insert (personne $personne){
+        $stmt = $this->getConnexion()->prepare("INSERT INTO personnes (nom, prenom, adresse, codePostal, pays, societe) VALUES (:nom,:prenom,:adresse,:codePostal,:pays,:societe)");
+        $stmt->bindValue(':nom', $personne->getName(), \PDO::PARAM_STR);
+        $stmt->bindValue(':prenom', $personne->getPrenom(), \PDO::PARAM_STR);
+        $stmt->bindValue(':adresse', $personne->getAdresse(), \PDO::PARAM_STR);
+        $stmt->bindValue(':codePostal', $personne->getPostalCode(), \PDO::PARAM_STR);
+        $stmt->bindValue(':pays', $personne->getPays(), \PDO::PARAM_STR);
+        $stmt->bindValue(':societe', $personne->getSociete(), \PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function getAll (personne $personne){
+        $stmt = $this->getConnexion()->prepare("INSERT INTO personnes (nom, prenom, adresse, codePostal, pays, societe) VALUES (:nom,:prenom,:adresse,:codePostal,:pays,:societe)");
+        $stmt->bindValue(':nom', $personne->getName(), \PDO::PARAM_STR);
+        $stmt->bindValue(':prenom', $personne->getPrenom(), \PDO::PARAM_STR);
+        $stmt->bindValue(':adresse', $personne->getAdresse(), \PDO::PARAM_STR);
+        $stmt->bindValue(':codePostal', $personne->getPostalCode(), \PDO::PARAM_STR);
+        $stmt->bindValue(':pays', $personne->getPays(), \PDO::PARAM_STR);
+        $stmt->bindValue(':societe', $personne->getSociete(), \PDO::PARAM_STR);
+        $stmt->execute();
     }
 }
 ?>

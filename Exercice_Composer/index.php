@@ -1,11 +1,15 @@
 <?php
+// Serveur via le terminal - php -S localhost:9090
 // Composer autoloader with: require 'vendor/autoload.php';
 require 'vendor/autoload.php';
 use Poo\ExempleComposer\manager\personneManager;
 
+// connection to DB
+$connexion = new PDO('mysql:host=localhost:8889;dbname=poo_php', 'root', 'root');
+
 // affichage
 $number = 5;
-$newPersonne = new personneManager();
+$newPersonne = new personneManager($connexion);
 $testPersonne = $newPersonne->create($number);
 echo "<table>";
 echo "<thead>";
@@ -31,6 +35,7 @@ foreach ($testPersonne as $personne) {
     echo "<th>".$personne->getPays()."</th>";
     echo "<th>".$personne->getSociete()."</th>";
     echo "</tr>";
+    //$newPersonne->insert($personne);
 }
 echo "</tbody>";
 echo "</table>";
