@@ -53,14 +53,14 @@ class personneManager{
 
     public function readAll(){
         $stmt = $this->getConnexion()->prepare("SELECT * FROM personnes");
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'personne');
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Poo\ExempleComposer\entity\personne');
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_CLASS);
     }
 
     public function read($idPersonne){
         $stmt = $this->getConnexion()->prepare("SELECT * FROM personnes WHERE id = $idPersonne");
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'personne');
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Poo\ExempleComposer\entity\personne');
         $stmt->execute();
         $personne = $stmt->fetch(\PDO::FETCH_CLASS);
         return $personne;

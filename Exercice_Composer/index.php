@@ -40,6 +40,13 @@ echo "<table>";
     }
     echo "</tbody>";
 echo "</table>";
-$newPersonne->readAll();
-$newPersonne->read(1);
+
+// Retourner toutes les personnes
+$allPersonnes = $newPersonne->readAll();
+var_dump($allPersonnes);
+echo "</br>";
+// Retourner une seule personne
+$onePersonne = $newPersonne->read(1);
+var_dump($onePersonne);
+
 ?>
