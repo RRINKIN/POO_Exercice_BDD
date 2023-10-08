@@ -4,24 +4,29 @@ namespace Poo\ExempleComposer\manager;
 
 // Declaring the classes to be used
 use Poo\ExempleComposer\entity\personne;
-use faker;
+use Faker\Factory;
 
-// generate fake people using faker: PersonneManager::create($nombre)
+// generate fake people
 class personneManager{
     // constructor
     public function __construct(){
     }
 
     // other functions
-    public function create(){
-        $faker = Faker\Factory::create();
-        $faker->name();
-        $faker->firstName();
-        $faker->streetAddress();
-        $faker->postcode();
-        $faker->country();
-        $faker->company();
-        return $faker;
+    public function create($number){
+        $personnes = [];
+        $faker = Factory::create();
+        for ($i=0; $i<$number; $i++){
+            $personne = new personne();
+            $personne->setName($faker->name());
+            $personne->setPrenom($faker->firstName());
+            $personne->setAdresse($faker->streetAddress());
+            $personne->setPostalCode($faker->postcode());
+            $personne->setPays($faker->country());
+            $personne->setSociete($faker->company());
+            array_push($personnes, $personne);
+        }    
+        return $personnes;
     }
 }
 ?>
