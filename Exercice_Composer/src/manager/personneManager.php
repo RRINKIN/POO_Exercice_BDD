@@ -23,7 +23,7 @@ class personneManager{
     }
 
     // Function faker
-    public function create($number){
+    public static function create($number){
         $personnes = [];
         $faker = Factory::create();
         for ($i=0; $i<$number; $i++){

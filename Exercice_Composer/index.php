@@ -10,7 +10,9 @@ $connexion = new PDO('mysql:host=localhost:8889;dbname=poo_php', 'root', 'root')
 // utilisation de Faker
 $number = 5;
 $newPersonne = new personneManager($connexion);
-$testPersonne = $newPersonne->create($number);
+//$testPersonne = $newPersonne->create($number);
+$testPersonne = personneManager::create($number);
+
 // Affichage de Faker
 echo "<table>";
     echo "<thead>";
@@ -43,10 +45,14 @@ echo "</table>";
 
 // Retourner toutes les personnes
 $allPersonnes = $newPersonne->readAll();
+echo "<pre>";
 var_dump($allPersonnes);
+echo "</pre>";
 echo "</br>";
+
 // Retourner une seule personne
 $onePersonne = $newPersonne->read(1);
+echo "<pre>";
 var_dump($onePersonne);
-
+echo "</pre>";
 ?>
